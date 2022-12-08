@@ -9,6 +9,6 @@ export const TextTitle = styled.Text`
     font-size: ${theme.FONT_SIZE.BODY_M}px;
     color: ${theme.COLORS.BASE.GRAY[100]};
   `};  
-  line-height: "130%";
+  line-height: 20.8px ;
   margin-bottom: 8px
 `;
