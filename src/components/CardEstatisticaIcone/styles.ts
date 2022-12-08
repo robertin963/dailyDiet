@@ -2,10 +2,10 @@ import styled, {css} from "styled-components/native";
 import { TouchableOpacity } from "react-native";
 import { ArrowUpRight } from 'phosphor-react-native';
 
-export type cardEstatisticaStyleProps = "PRIMARY" | "SECONDARY";
+export type cardEstatisticaStyleIconeProps = "PRIMARY" | "SECONDARY";
 
 type Props = {
-  type: cardEstatisticaStyleProps;
+  type: cardEstatisticaStyleIconeProps;
 }
 
 export const Container = styled(TouchableOpacity)<Props>`
