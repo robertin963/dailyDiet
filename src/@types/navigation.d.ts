@@ -5,7 +5,8 @@ export declare global{
       estatisticas: {
         percentagem: number;
         type?: string;
-      }
+      };
+      refeicao: undefined;
     }
   }
 }

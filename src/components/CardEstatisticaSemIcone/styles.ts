@@ -54,5 +54,4 @@ export const TextMensagem = styled.Text`
   //height: 18px;
   margin: 0 16px 0 16px;
   text-align: center;
-
 `;
