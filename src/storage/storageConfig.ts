@@ -1,0 +1,4 @@
+const REFEICOES_COLLECTION = '@dailyDiet:refeicoes';
+const SEQUENCIADENTRO_COLLECTION = '@dailyDiet:sequencia';
+
+export { REFEICOES_COLLECTION, SEQUENCIADENTRO_COLLECTION };

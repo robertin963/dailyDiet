@@ -4,26 +4,53 @@ import { format } from 'date-fns';
 import { CardHeaderNovaRefeicao } from "@components/CardHeaderNovaRefeicao";
 import { Container } from "@components/Loading/styles";
 import { TextInputMask } from "react-native-masked-text";
-import { BtnDieta, CirculoStatus, Context, DivLinha, DivLinha2Colunas, DivLinha2ColunasSemMargem, DivLinhaMetade, Form, Input, Label } from "./styles";
+import { BtnAddRefeicao, BtnDieta, CirculoStatus, Context, DivLinha, DivLinha2Colunas, DivLinha2ColunasSemMargem, DivLinhaMetade, Form, Input, Label, TextBtnRefeicao } from "./styles";
 import THEME from '../../theme';
+import {refeicaoCreate} from '@storage/refeicao/refeicaoCreate';
+import { err } from "react-native-svg/lib/typescript/xml";
 
 
 export function NovaRefeicao(){
 
 
-  const [data, setData] = useState('');
-  
+  const [date, setDate] = useState('');  
   const [hora, setHora] = useState('');
   const [btnSim, setBtnSim] = useState("DEFAULT");
   const [btnNao, setBtnNao] = useState("DEFAULT");
+  const [refeicao, setRefeicao] = useState("");
+  const [descricao, setDescricao] = useState("");
+  const [dentroDieta, setDentroDieta] = useState(false);
+  
+
+
+  async function handleAddRefeicao(){
+    try {
+      const dados = {
+          hora, 
+          refeicao, 
+          descricao,
+          dentroDieta,
+          type: dentroDieta  ? "PRIMARY" : "SECONDARY"      
+      }
+  
+      await refeicaoCreate({title: date, hora, refeicao, descricao, dentroDieta, type:  dentroDieta  ? "PRIMARY" : "SECONDARY" });
+      
+    } catch (error) {
+      console.log(error);
+      
+    }
+
+  }
   
 
   function handleSetDentroDieta(){
     if(btnSim === "DEFAULT"){
       setBtnSim("PRIMARY");
       setBtnNao("DEFAULT");
+      setDentroDieta(true);
     }else{
       setBtnSim("DEFAULT")
+      setDentroDieta(false);
     }
   }
 
@@ -31,8 +58,10 @@ export function NovaRefeicao(){
     if(btnNao === "DEFAULT"){
       setBtnNao("SECONDARY");
       setBtnSim("DEFAULT");
+      setDentroDieta(false);
     }else{
       setBtnNao("DEFAULT")
+      setDentroDieta(false);
     }
   }
 
@@ -43,14 +72,14 @@ export function NovaRefeicao(){
         <Form>
           <DivLinha>
             <Label>Nome</Label>
-            <Input />
+            <Input value={refeicao} onChangeText={setRefeicao} />
           </DivLinha>
 
           <DivLinha>
             <Label>Descrição</Label>
             <Input style={{
               height: 120
-            }} multiline={true} numberOfLines={4} />
+            }} multiline={true} numberOfLines={4} value={descricao} onChangeText={setDescricao} />
           </DivLinha>
 
           <DivLinha2Colunas>
@@ -64,8 +93,8 @@ export function NovaRefeicao(){
                 }}
                 placeholder={format(new Date(), 'dd/MM/yyyy')}
                 keyboardType={"number-pad"}
-                value={data}
-                onChangeText={setData}             
+                value={date}
+                onChangeText={setDate}             
             />
             </DivLinhaMetade>
             <DivLinhaMetade>
@@ -104,6 +133,9 @@ export function NovaRefeicao(){
 
         </Form>
       </Context>
+      <BtnAddRefeicao onPress={handleAddRefeicao}>
+        <TextBtnRefeicao>Cadastrar refeição</TextBtnRefeicao>
+      </BtnAddRefeicao>
     </Container>
   );  
 }

@@ -97,3 +97,25 @@ export const CirculoStatus = styled.View<Props>`
   margin-right: 8px;
   border-radius: 8px;
 `;
+
+export const BtnAddRefeicao = styled.TouchableOpacity`
+  height: 50px;
+  width: 327px;
+  background-color: ${({theme}) => theme.COLORS.BASE.GRAY[200]};
+  margin-bottom: 40px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+`;
+
+export const TextBtnRefeicao = styled.Text`
+   ${({theme}) => css`
+    font-family: ${theme.FONT_FAMILY.BOLD};
+    font-size: ${theme.FONT_SIZE.BODY_S}px;
+    color: ${theme.COLORS.BASE.WHITE};
+  `};  
+  align-items: center;
+  text-align: center;
+  
+  
+`
