@@ -1,7 +1,8 @@
-import { CardHeaderNovaRefeicao } from "@components/CardHeaderNovaRefeicao";
-import { Container } from "@components/Loading/styles";
 import { useState } from "react";
 import { StyleSheet } from "react-native";
+import { format } from 'date-fns';
+import { CardHeaderNovaRefeicao } from "@components/CardHeaderNovaRefeicao";
+import { Container } from "@components/Loading/styles";
 import { TextInputMask } from "react-native-masked-text";
 import { BtnDieta, CirculoStatus, Context, DivLinha, DivLinha2Colunas, DivLinha2ColunasSemMargem, DivLinhaMetade, Form, Input, Label } from "./styles";
 import THEME from '../../theme';
@@ -9,8 +10,10 @@ import THEME from '../../theme';
 
 export function NovaRefeicao(){
 
-  const [data, setData] = useState('12/12/2022');
-  const [hora, setHora] = useState('00:00');
+
+  const [data, setData] = useState('');
+  
+  const [hora, setHora] = useState('');
   const [btnSim, setBtnSim] = useState("DEFAULT");
   const [btnNao, setBtnNao] = useState("DEFAULT");
   
@@ -51,30 +54,33 @@ export function NovaRefeicao(){
           </DivLinha>
 
           <DivLinha2Colunas>
-          <DivLinhaMetade>
-            <Label>Data</Label>
-            <TextInputMask 
-              style={styles.input}
-              type={'datetime'}
-              options={{
-                format: 'DD/MM/YYYY'
-              }}
-              value={data}
-              onChangeText={setData}             
-          />
-          </DivLinhaMetade>
-          <DivLinhaMetade>
-            <Label>Hora</Label>
-            <TextInputMask 
-              style={styles.input}
-              type={'datetime'}
-              options={{
-                format: 'HH:MM'
-              }}
-              value={hora}
-              onChangeText={setHora}             
-          />
-          </DivLinhaMetade>          
+            <DivLinhaMetade>
+              <Label>Data</Label>
+              <TextInputMask 
+                style={styles.input}
+                type={'datetime'}
+                options={{
+                  format: 'DD/MM/YYYY'
+                }}
+                placeholder={format(new Date(), 'dd/MM/yyyy')}
+                keyboardType={"number-pad"}
+                value={data}
+                onChangeText={setData}             
+            />
+            </DivLinhaMetade>
+            <DivLinhaMetade>
+              <Label>Hora</Label>
+              <TextInputMask 
+                style={styles.input}
+                type={'datetime'}
+                options={{
+                  format: 'HH:MM'
+                }}
+                placeholder={format(new Date(), 'HH:MM')}
+                value={hora}
+                onChangeText={setHora}             
+            />
+            </DivLinhaMetade>          
           </DivLinha2Colunas>
 
           <DivLinha>
@@ -113,6 +119,7 @@ const styles = StyleSheet.create({
     padding: 14,
     borderColor: THEME.COLORS.BASE.GRAY[500],
     borderWidth: 1,
+    marginTop: 20,
 
   }
 })
