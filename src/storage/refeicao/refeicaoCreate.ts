@@ -17,13 +17,13 @@ export async function  refeicaoCreate({title, hora, refeicao, descricao, dentroD
     const alimentacoes = await refeicoesGetAll();
     const refeicoes = await JSON.stringify(alimentacoes);
 
-    console.log(refeicoes.length);
-
+    console.log(alimentacoes);
+    console.log(refeicoes);
+   
 
     return;
-
     
-    if(refeicoes.length === 0){
+    if(alimentacoes.length === 0){
       const newRefeicao = {
         title,
         data: [{
