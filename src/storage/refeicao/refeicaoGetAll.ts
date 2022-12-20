@@ -14,11 +14,20 @@ type refeicaoProps = {
       ]
 }
 
+function converterData(data: string){
+  const newData = data.split('/').reverse().join('-');
+  return new Date(newData);
+
+}
+
 export async function refeicoesGetAll(){
   try {
     const storage = await AsyncStorage.getItem(REFEICOES_COLLECTION);
-    const refeicoes: refeicaoProps[] = storage ? JSON.parse(storage) : []; 
+    const storages: refeicaoProps[] = storage ? JSON.parse(storage) : []; 
+    const refeicoes = storages.sort((a,b) => converterData(a.title) > converterData(b.title));
+     
     return refeicoes;    
+    
   } catch (error) {
     throw error;
   }

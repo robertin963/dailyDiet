@@ -4,22 +4,27 @@ import { refeicoesGetAll } from "./refeicaoGetAll";
 
 type refeicaoProps = {
   title: string;
+  data: {
   hora: string, 
   refeicao: string, 
   descricao: string;          
   dentroDieta: boolean,
   type: "PRIMARY" | "SECONDARY"
+  }[];
 }
 
 export async function  refeicaoCreate({title, hora, refeicao, descricao, dentroDieta, type }: refeicaoProps){
   try {
     
-    const alimentacoes = await refeicoesGetAll();    
+    const alimentacoes = await refeicoesGetAll();      
+     console.log(alimentacoes);    
+
+    return;
 
     
     if(alimentacoes.length === 0){
       console.log('não tem item');
-      return;
+      //return;
       const newRefeicao = {
         title,
         data: [{
@@ -34,9 +39,32 @@ export async function  refeicaoCreate({title, hora, refeicao, descricao, dentroD
       await AsyncStorage.setItem(REFEICOES_COLLECTION, storage);    
     }else{
       const existeData = alimentacoes.filter(alimentacao => alimentacao.title === title);
-      console.log(existeData);
       if(existeData.length > 0){
-        console.log('Data já existe');
+        const dados = alimentacoes.filter(alimento => alimento.title !== title);
+        let dataFiltrada = alimentacoes.filter(alimento => alimento.title === title);
+
+        dataFiltrada.data.push({
+          hora,
+          refeicao,
+          descricao,
+          dentroDieta,
+          type,
+        })
+
+        const newRefeicao = {
+          title,
+          data: [{
+            hora,
+            refeicao,
+            descricao,
+            dentroDieta,
+            type,
+          }]
+        }
+        const novasRefeicoes = [...dados, newRefeicao];
+        const storage = JSON.stringify(novasRefeicoes);
+        await AsyncStorage.setItem(REFEICOES_COLLECTION, storage);    
+        
       }else{
         const newRefeicao = {
           title,
@@ -48,6 +76,11 @@ export async function  refeicaoCreate({title, hora, refeicao, descricao, dentroD
             type,
           }]
         }
+        
+        const newDados = [...alimentacoes, newRefeicao];
+        const storage = JSON.stringify(newDados);
+        await AsyncStorage.setItem(REFEICOES_COLLECTION, storage);    
+        //.sort((a, b) => a.idx - b.idx)
         
       }
 
