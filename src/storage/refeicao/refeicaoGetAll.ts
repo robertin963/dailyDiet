@@ -18,9 +18,7 @@ export async function refeicoesGetAll(){
   try {
     const storage = await AsyncStorage.getItem(REFEICOES_COLLECTION);
     const refeicoes: refeicaoProps[] = storage ? JSON.parse(storage) : []; 
-
-    return refeicoes;
-    
+    return refeicoes;    
   } catch (error) {
     throw error;
   }
