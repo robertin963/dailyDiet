@@ -8,6 +8,7 @@ import { BtnAddRefeicao, BtnDieta, CirculoStatus, Context, DivLinha, DivLinha2Co
 import THEME from '../../theme';
 import {refeicaoCreate} from '@storage/refeicao/refeicaoCreate';
 import { err } from "react-native-svg/lib/typescript/xml";
+import { useNavigation } from "@react-navigation/native";
 
 
 export function NovaRefeicao(){
@@ -22,6 +23,7 @@ export function NovaRefeicao(){
   const [dentroDieta, setDentroDieta] = useState(false);
   
 
+  const navigation = useNavigation();
 
   async function handleAddRefeicao(){
     try {
@@ -34,6 +36,8 @@ export function NovaRefeicao(){
       }
   
       await refeicaoCreate({title: date, hora, refeicao, descricao, dentroDieta, type:  dentroDieta  ? "PRIMARY" : "SECONDARY" });
+
+      navigation.navigate('salvo', {type:  dentroDieta  ? "PRIMARY" : "SECONDARY"});
       
     } catch (error) {
       console.log(error);

@@ -6,6 +6,7 @@ export function BtnIcon(){
   const navigation = useNavigation();
 
   function handleAddNewRefeicao(){
+    // navigation.navigate('salvo', {type : 'SECONDARY'})
     navigation.navigate('refeicao');
   }
 

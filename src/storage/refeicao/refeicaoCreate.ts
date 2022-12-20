@@ -49,7 +49,7 @@ export async function  refeicaoCreate({title, hora, refeicao, descricao, dentroD
         // console.log('dataFiltrada: ', dataFiltrada[0]);
         
         const novasRefeicoes = [...dados, dataFiltrada];
-        console.log(novasRefeicoes);
+        // console.log(novasRefeicoes);
         const storage = JSON.stringify(novasRefeicoes);
         await AsyncStorage.setItem(REFEICOES_COLLECTION, storage);    
         

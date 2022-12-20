@@ -7,6 +7,9 @@ export declare global{
         type?: string;
       };
       refeicao: undefined;
+      salvo: {
+        type: 'PRIMARY' | 'SECONDARY'
+      }
     }
   }
 }

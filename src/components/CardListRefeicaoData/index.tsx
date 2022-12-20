@@ -24,9 +24,9 @@ export function CardListRefeicoesData(){
   try {
     async function fetchRefeicoes(){
       const dados = await refeicoesGetAll();
-      console.log(dados);
+      // console.log(dados);
       setDadosRefeicos(dados);
-      console.log(dadosRefeicoes);
+      // console.log(dadosRefeicoes);
     }
 
     useFocusEffect(useCallback(() => {
