@@ -7,7 +7,6 @@ import { TextInputMask } from "react-native-masked-text";
 import { BtnAddRefeicao, BtnDieta, CirculoStatus, Context, DivLinha, DivLinha2Colunas, DivLinha2ColunasSemMargem, DivLinhaMetade, Form, Input, Label, TextBtnRefeicao } from "./styles";
 import THEME from '../../theme';
 import {refeicaoCreate} from '@storage/refeicao/refeicaoCreate';
-import { err } from "react-native-svg/lib/typescript/xml";
 import { useNavigation } from "@react-navigation/native";
 
 
