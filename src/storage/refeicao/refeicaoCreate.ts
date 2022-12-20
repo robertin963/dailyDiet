@@ -4,26 +4,22 @@ import { refeicoesGetAll } from "./refeicaoGetAll";
 
 type refeicaoProps = {
   title: string;
-  data: {
   hora: string, 
   refeicao: string, 
   descricao: string;          
   dentroDieta: boolean,
   type: "PRIMARY" | "SECONDARY"
-  }[];
 }
 
 export async function  refeicaoCreate({title, hora, refeicao, descricao, dentroDieta, type }: refeicaoProps){
   try {
     
-    const alimentacoes = await refeicoesGetAll();      
-     console.log(alimentacoes);    
-
-    return;
-
+    const alimentacoes = await refeicoesGetAll();          
     
+    // return;
+
     if(alimentacoes.length === 0){
-      console.log('não tem item');
+      // console.log('não tem item');
       //return;
       const newRefeicao = {
         title,
@@ -41,27 +37,19 @@ export async function  refeicaoCreate({title, hora, refeicao, descricao, dentroD
       const existeData = alimentacoes.filter(alimentacao => alimentacao.title === title);
       if(existeData.length > 0){
         const dados = alimentacoes.filter(alimento => alimento.title !== title);
-        let dataFiltrada = alimentacoes.filter(alimento => alimento.title === title);
-
-        dataFiltrada.data.push({
+        let dataFiltrada = alimentacoes.find(alimento => alimento.title === title);
+        
+        dataFiltrada?.data.push({
           hora,
           refeicao,
           descricao,
           dentroDieta,
           type,
         })
-
-        const newRefeicao = {
-          title,
-          data: [{
-            hora,
-            refeicao,
-            descricao,
-            dentroDieta,
-            type,
-          }]
-        }
-        const novasRefeicoes = [...dados, newRefeicao];
+        // console.log('dataFiltrada: ', dataFiltrada[0]);
+        
+        const novasRefeicoes = [...dados, dataFiltrada];
+        console.log(novasRefeicoes);
         const storage = JSON.stringify(novasRefeicoes);
         await AsyncStorage.setItem(REFEICOES_COLLECTION, storage);    
         
@@ -83,8 +71,6 @@ export async function  refeicaoCreate({title, hora, refeicao, descricao, dentroD
         //.sort((a, b) => a.idx - b.idx)
         
       }
-
-      return;
 
     }
   } catch (error) {

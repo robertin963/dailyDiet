@@ -11,7 +11,7 @@ type Props = {
 }
 
 
-export const Container = styled.View<Props>`
+export const Container = styled.TouchableOpacity<Props>`
   width: 100%;
   height: 132px;
   background-color: ${({theme, type}) => type === 'PRIMARY' ? theme.COLORS.BRAND.GREEN['LIGHT'] : type === 'SECONDARY' ? theme.COLORS.BRAND.RED['LIGHT'] : theme.COLORS.BASE.GRAY[500]};  

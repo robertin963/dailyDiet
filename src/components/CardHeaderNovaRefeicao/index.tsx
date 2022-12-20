@@ -18,10 +18,10 @@ export function CardHeaderNovaRefeicao({label, type = 'PRIMARY', ...rest}: Props
   }
 
   return (
-    <Container type={type} {...rest}>
+    <Container type={type} {...rest} onPress={handleGoBack}>
       <AreaSegura>
       <IconArrowLeft type={type} /> 
-      <BackButton onPress={handleGoBack}>        
+      <BackButton >        
       </BackButton>      
       <DivTexts>
         <TextPercentagem>{label}</TextPercentagem>

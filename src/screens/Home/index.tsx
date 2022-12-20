@@ -3,8 +3,8 @@ import { CardRefeicaoBtn } from "@components/CardRefeicaoBtn";
 import { HeaderHome } from "@components/HeaderHome";
 import { CardListRefeicoes } from "@components/CardListRefeicoes";
 import { Container } from "./styles";
-import { CardListRefeicoesData } from "@components/CardListRefeicaoData";
 import { useNavigation } from "@react-navigation/native";
+import { CardListRefeicoesData } from "@components/CardListRefeicaoData";
 
 
 export function Home(){

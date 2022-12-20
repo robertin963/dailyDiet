@@ -24,7 +24,7 @@ export async function refeicoesGetAll(){
   try {
     const storage = await AsyncStorage.getItem(REFEICOES_COLLECTION);
     const storages: refeicaoProps[] = storage ? JSON.parse(storage) : []; 
-    const refeicoes = storages.sort((a,b) => converterData(a.title) > converterData(b.title));
+    const refeicoes = storages.length > 0 ? storages.sort((a,b) => converterData(a.title) > converterData(b.title)) : [];
      
     return refeicoes;    
     
