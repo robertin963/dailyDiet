@@ -9,9 +9,7 @@ import THEME from '../../theme';
 import {refeicaoCreate} from '@storage/refeicao/refeicaoCreate';
 import { useNavigation } from "@react-navigation/native";
 
-
 export function NovaRefeicao(){
-
 
   const [date, setDate] = useState('');  
   const [hora, setHora] = useState('');
@@ -19,8 +17,7 @@ export function NovaRefeicao(){
   const [btnNao, setBtnNao] = useState("DEFAULT");
   const [refeicao, setRefeicao] = useState("");
   const [descricao, setDescricao] = useState("");
-  const [dentroDieta, setDentroDieta] = useState(false);
-  
+  const [dentroDieta, setDentroDieta] = useState(false);  
 
   const navigation = useNavigation();
 
@@ -39,12 +36,9 @@ export function NovaRefeicao(){
       navigation.navigate('salvo', {type:  dentroDieta  ? "PRIMARY" : "SECONDARY"});
       
     } catch (error) {
-      console.log(error);
-      
+      console.log(error);      
     }
-
-  }
-  
+  }  
 
   function handleSetDentroDieta(){
     if(btnSim === "DEFAULT"){

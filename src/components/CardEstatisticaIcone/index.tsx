@@ -4,10 +4,11 @@ import { Container, IconArrowUpRight, TextPercentagem, DivTexts, TextMensagem, c
 
 type Props = TouchableOpacityProps & {
   type?: cardEstatisticaIconeStyleProps;
-  percentagem: Number;
+  percentagem: number;
 }
 
 export function CardEstatisticaIcone({percentagem, type = 'PRIMARY', ...rest}: Props){
+  
   return (
     <Container type={type} {...rest}>
       
@@ -15,7 +16,7 @@ export function CardEstatisticaIcone({percentagem, type = 'PRIMARY', ...rest}: P
           type={type}
         />
       <DivTexts>
-        <TextPercentagem>{percentagem}%</TextPercentagem>
+        <TextPercentagem>{percentagem?.toFixed(2)}%</TextPercentagem>
         <TextMensagem>das refeições dentro da dieta</TextMensagem>
       </DivTexts>
     </Container>
