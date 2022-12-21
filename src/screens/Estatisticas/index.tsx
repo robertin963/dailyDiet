@@ -37,7 +37,7 @@ export function Estatisticas(){
 
   return (
     <Container type={type}>
-      <CardEstatisticaIconeVoltar percentagem={percentagem?.toFixed(2)} type={percentagem >= 50 ? 'PRIMARY' : 'SECONDARY' } />
+      <CardEstatisticaIconeVoltar percentagem={percentagem ? percentagem?.toFixed(2) : 0} type={percentagem >= 50 ? 'PRIMARY' : 'SECONDARY' } />
       <Context>
         <Title>Estatísticas gerais</Title>
         <CardEstatisticaSemIcone valor={estatisticas?.melhorSequencia} textoEmbaixo="melhor sequência de pratos dentro da dieta" />

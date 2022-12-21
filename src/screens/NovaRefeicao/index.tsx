@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, Alert } from "react-native";
 import { format } from 'date-fns';
 import { CardHeaderNovaRefeicao } from "@components/CardHeaderNovaRefeicao";
 import { Container } from "@components/Loading/styles";
@@ -30,6 +30,32 @@ export function NovaRefeicao(){
           dentroDieta,
           type: dentroDieta  ? "PRIMARY" : "SECONDARY"      
       }
+
+      if(refeicao.trim().length < 1){
+        Alert.alert('Nova Refeição', 'Nome precisa ser preenchida!');
+        return; 
+      }
+
+      if(descricao.trim().length < 1){
+        Alert.alert('Nova Refeição', 'Descrição precisa ser preenchida!');
+        return; 
+      }
+
+      if(date.trim().length < 1){ 
+        Alert.alert('Nova Refeição', 'Data precisa ser preenchida!');
+        return;
+      }
+
+      if(hora.trim().length < 1){ 
+        Alert.alert('Nova Refeição', 'Hora precisa ser preenchida!');
+        return;
+      }
+
+      if(btnSim === 'DEFAULT' && btnNao === 'DEFAULT'){
+        Alert.alert('Nova Refeição', 'Está dentro da dieta precisa ser definido!');
+        return; 
+      }
+
   
       await refeicaoCreate({title: date, hora, refeicao, descricao, dentroDieta, type:  dentroDieta  ? "PRIMARY" : "SECONDARY" });
 

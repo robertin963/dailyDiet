@@ -37,7 +37,7 @@ export function Home(){
     <Container>
       <HeaderHome />
       <CardEstatisticaIcone 
-        percentagem={estatistica?.percentagemDentroDieta}  
+        percentagem={estatistica?.percentagemDentroDieta ? estatistica?.percentagemDentroDieta : 0}  
         type={estatistica?.percentagemDentroDieta >= 50 ? 'PRIMARY' : 'SECONDARY'} 
         onPress={handleViewEstatisticas}/>
       <CardRefeicaoBtn />

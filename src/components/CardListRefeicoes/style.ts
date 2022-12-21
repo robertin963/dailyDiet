@@ -8,7 +8,7 @@ type Props = {
 }
 
 
-export const Container = styled.View`
+export const Container = styled.TouchableOpacity`
   height: 49px;
   border-radius:  6px;
   border: solid 1px;
