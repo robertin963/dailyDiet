@@ -10,6 +10,7 @@ type refeicaoProps = {
   title: string,
       data: [
         { 
+          id: number,
           hora: string, 
           refeicao: string, 
           descricao: string;          
@@ -21,14 +22,18 @@ type refeicaoProps = {
 
 export function CardListRefeicoesData(){
   const [dadosRefeicoes, setDadosRefeicos]  = useState<refeicaoProps[]>([]);
+
   try {
     async function fetchRefeicoes(){
       const dados = await refeicoesGetAll();
-      // console.log(dados);
+      
+      dados.map(dado => {
+        dado.data.sort((a,b) => a.hora < b.hora)
+      })
+      
       setDadosRefeicos(dados);
       // console.log(dadosRefeicoes);
-    }
-
+    }    
     useFocusEffect(useCallback(() => {
       fetchRefeicoes();
     },[]));
@@ -83,7 +88,7 @@ export function CardListRefeicoesData(){
         sections={dadosRefeicoes}
         keyExtractor={(item, index) => item.hora + item.refeicao + index}
         renderItem={({ item }) => 
-          <CardListRefeicoes hora={item.hora} nomeRefeicao={item.refeicao} type={item.type} />                 
+          <CardListRefeicoes hora={item.hora} id={item.id} nomeRefeicao={item.refeicao} type={item.type} />                 
         }
         renderSectionHeader={({section: {title} }) => (
           <DataRefeicao>{title.replaceAll('/','.')}</DataRefeicao>

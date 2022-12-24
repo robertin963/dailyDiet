@@ -8,6 +8,9 @@ import { BtnAddRefeicao, BtnDieta, CirculoStatus, Context, DivLinha, DivLinha2Co
 import THEME from '../../theme';
 import {refeicaoCreate} from '@storage/refeicao/refeicaoCreate';
 import { useNavigation } from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { IDENTIFICADOR_COLLECTION } from "@storage/storageConfig";
+import { getNewIdRefeicao } from "@storage/refeicao/getNewIdRefeicao";
 
 export function NovaRefeicao(){
 
@@ -23,7 +26,10 @@ export function NovaRefeicao(){
 
   async function handleAddRefeicao(){
     try {
+      const newId = await getNewIdRefeicao();
+      console.log('NovoID', newId);
       const dados = {
+          id: newId,
           hora, 
           refeicao, 
           descricao,
@@ -57,7 +63,7 @@ export function NovaRefeicao(){
       }
 
   
-      await refeicaoCreate({title: date, hora, refeicao, descricao, dentroDieta, type:  dentroDieta  ? "PRIMARY" : "SECONDARY" });
+      await refeicaoCreate({title: date, hora, id: newId, refeicao, descricao, dentroDieta, type:  dentroDieta  ? "PRIMARY" : "SECONDARY" });
 
       navigation.navigate('salvo', {type:  dentroDieta  ? "PRIMARY" : "SECONDARY"});
       

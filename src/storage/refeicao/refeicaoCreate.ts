@@ -1,30 +1,32 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { REFEICOES_COLLECTION } from "@storage/storageConfig";
+import { IDENTIFICADOR_COLLECTION, REFEICOES_COLLECTION } from "@storage/storageConfig";
+import { useState } from "react";
 import { refeicoesGetAll } from "./refeicaoGetAll";
 
 type refeicaoProps = {
   title: string;
   hora: string, 
+  id: number,
   refeicao: string, 
   descricao: string;          
   dentroDieta: boolean,
   type: "PRIMARY" | "SECONDARY"
 }
 
-export async function  refeicaoCreate({title, hora, refeicao, descricao, dentroDieta, type }: refeicaoProps){
+export async function  refeicaoCreate({title, hora, id, refeicao, descricao, dentroDieta, type }: refeicaoProps){
   try {
     
     const alimentacoes = await refeicoesGetAll();          
-    
-    // return;
-
     if(alimentacoes.length === 0){
       // console.log('não tem item');
       //return;
+      
+
       const newRefeicao = {
         title,
         data: [{
           hora,
+          id,
           refeicao,
           descricao,
           dentroDieta,
@@ -41,6 +43,7 @@ export async function  refeicaoCreate({title, hora, refeicao, descricao, dentroD
         
         dataFiltrada?.data.push({
           hora,
+          id,
           refeicao,
           descricao,
           dentroDieta,
@@ -58,6 +61,7 @@ export async function  refeicaoCreate({title, hora, refeicao, descricao, dentroD
           title,
           data: [{
             hora,
+            id,
             refeicao,
             descricao,
             dentroDieta,
@@ -67,12 +71,16 @@ export async function  refeicaoCreate({title, hora, refeicao, descricao, dentroD
         
         const newDados = [...alimentacoes, newRefeicao];
         const storage = JSON.stringify(newDados);
-        await AsyncStorage.setItem(REFEICOES_COLLECTION, storage);    
+        await AsyncStorage.setItem(REFEICOES_COLLECTION, storage);           
+        
         //.sort((a, b) => a.idx - b.idx)
         
       }
 
     }
+    const newId = {id: id};
+    const idStorage = JSON.stringify(newId);
+    await AsyncStorage.setItem(IDENTIFICADOR_COLLECTION, idStorage);
   } catch (error) {
     throw error;
   }
