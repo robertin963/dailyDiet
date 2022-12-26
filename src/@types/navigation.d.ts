@@ -9,6 +9,14 @@ export declare global{
       refeicao: undefined;
       salvo: {
         type: 'PRIMARY' | 'SECONDARY'
+      };
+      descricao: {
+        title: string;
+        refeicao: string;
+        descricao: string;
+        hora: string;
+        dentroDieta: boolean;
+        type: 'PRIMARY' | 'SECONDARY';
       }
     }
   }

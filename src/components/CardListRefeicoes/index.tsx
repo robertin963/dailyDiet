@@ -1,4 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useNavigation } from "@react-navigation/native";
 import { refeicoesGetAll } from "@storage/refeicao/refeicaoGetAll";
 import { IDENTIFICADOR_COLLECTION, REFEICOES_COLLECTION } from "@storage/storageConfig";
 import { TouchableOpacityProps, ViewProps } from "react-native";
@@ -13,6 +14,8 @@ type Props = TouchableOpacityProps & {
 }
 
 export function CardListRefeicoes({hora, id,  nomeRefeicao, type = 'PRIMARY', ...rest} : Props){
+
+  const navigation = useNavigation();
 
   async function handleEditarRefeicao(id: number){
     
@@ -37,8 +40,18 @@ export function CardListRefeicoes({hora, id,  nomeRefeicao, type = 'PRIMARY', ..
     });    
     
     //console.log('refeicoesFiltradas', refeicoesFiltradas);
-    console.log('dataRefeicao', dataRefeicao);
-    console.log('refeicaoSelecionada', refeicaoSelecionada);
+    // console.log('dataRefeicao', dataRefeicao);
+    // console.log('refeicaoSelecionada', refeicaoSelecionada);
+    // console.log('refeicaoSelecionadaDescricao', refeicaoSelecionada?.descricao);
+
+    navigation.navigate('descricao', {
+      title: dataRefeicao,
+      refeicao: refeicaoSelecionada.refeicao,
+      descricao: refeicaoSelecionada.descricao,
+      hora: refeicaoSelecionada.hora,
+      dentroDieta: refeicaoSelecionada.dentroDieta,
+      type: refeicaoSelecionada.type  
+    });
     
   }
 

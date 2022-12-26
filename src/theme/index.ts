@@ -35,6 +35,7 @@ export default {
     BODY_M: 16,
     TITLE_XS: 14,
     TITLE_S: 18,
+    TITLE_MS: 20,
     TITLE_M: 24,
     TITLE_G: 32
   }
