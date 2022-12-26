@@ -33,7 +33,6 @@ export function CardListRefeicoesData(){
         dado.data.sort((a,b) => a.hora < b.hora)
       })
       setDadosRefeicos(dados);
-      console.log(dadosRefeicoes);
     }    
     useFocusEffect(useCallback(() => {
       fetchRefeicoes();

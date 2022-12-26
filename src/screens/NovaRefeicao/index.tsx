@@ -27,7 +27,7 @@ export function NovaRefeicao(){
   async function handleAddRefeicao(){
     try {
       const newId = await getNewIdRefeicao();
-      console.log('NovoID', newId);
+      // console.log('NovoID', newId);
       const dados = {
           id: newId,
           hora, 

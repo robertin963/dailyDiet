@@ -5,6 +5,7 @@ import { format } from 'date-fns';
 import { CardHeaderNovaRefeicao } from "@components/CardHeaderNovaRefeicao";
 import { TextInputMask } from "react-native-masked-text";
 import { BtnEditarExcluir, CirculoStatusDieta, Container, Context, IconPencilSimpleLine, IconTrash, SubTitulo, TextBtn, TextoStatusDieta, Titulo, TituloXS, ViewBtnEditarExcluir, ViewBtnInterno, ViewDentroDieta, ViewPrincipal, ViewTextos } from "./styles";
+import { refeicaoRemoveById } from "@storage/refeicao/refeicaoRemoveById";
 
 type RoutesParamsProps = {
     id: number;
@@ -21,6 +22,21 @@ export function DetalhesRefeicao(){
   const navigation = useNavigation();
   const route = useRoute();
   const { id, title, refeicao, descricao, hora, dentroDieta, type } = route.params as RoutesParamsProps;  
+
+  function handleRefeicaoRemove(){
+    Alert.alert('Remover', 'Deseja remover a refeicao?',
+     [
+      { text: 'Não', style: 'cancel'},
+      { text: 'Sim', onPress: () => handleRefeicaoRemoveConfirmed() }
+     ]);
+    
+  }
+
+  async function handleRefeicaoRemoveConfirmed(){
+
+    await refeicaoRemoveById(id, title);
+    navigation.navigate('home');
+  }
 
   function handleEditarRefeicao(){
     navigation.navigate('editar', {
@@ -57,7 +73,7 @@ export function DetalhesRefeicao(){
               <TextBtn type="PRIMARY">Editar refeição</TextBtn>
             </ViewBtnInterno>
           </BtnEditarExcluir>
-          <BtnEditarExcluir type="DEFAULT">
+          <BtnEditarExcluir type="DEFAULT" onPress={handleRefeicaoRemove}>
           <ViewBtnInterno>
               <IconTrash type="SECONDARY" />
               <TextBtn type="SECONDARY">Excluir refeição</TextBtn>

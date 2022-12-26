@@ -49,18 +49,35 @@ export async function  refeicaoUpdate({title, titleAntiga, hora, id, refeicao, d
           }) 
           
           const refeicoes = [...dados, dataFiltrada];
+
           const outrosDados = refeicoes.filter(alimentos => alimentos?.title !== titleAntiga);
           const dadosFiltrado = refeicoes.find(alimentos => alimentos?.title === titleAntiga);
           const dadosCorretos = dadosFiltrado?.data.filter(newRefeicao => newRefeicao?.id !== id );
           
-          const dadosDataCorreta = {
-            title: dadosFiltrado?.title,
-            data : dadosCorretos
-          } 
           
-          const novaRefeicao = [...outrosDados, dadosDataCorreta ]
-          const storage = JSON.stringify(novaRefeicao);
-          await AsyncStorage.setItem(REFEICOES_COLLECTION, storage);           
+          if(dadosCorretos?.length > 0){
+            // console.log('dadosCorretos', dadosCorretos);
+            // console.log('dadosFiltrado?.title', dadosFiltrado?.title);
+            // console.log('maior que zero');
+            
+            // return;  
+            const dadosDataCorreta = {
+              title: dadosFiltrado?.title,
+              data : dadosCorretos
+            }
+            const novaRefeicao = [...outrosDados, dadosDataCorreta ]
+            const storage = JSON.stringify(novaRefeicao);
+            await AsyncStorage.setItem(REFEICOES_COLLECTION, storage);
+          }else{
+            // console.log('outrosDados', outrosDados);
+            // return;
+            const novaRefeicao = outrosDados;
+            // console.log('novaRefeicao', novaRefeicao);
+            const storage = JSON.stringify(novaRefeicao);
+            await AsyncStorage.setItem(REFEICOES_COLLECTION, storage);
+          }
+          
+                    
 
         }else{
 
@@ -80,15 +97,23 @@ export async function  refeicaoUpdate({title, titleAntiga, hora, id, refeicao, d
           const outrosDados = refeicoes.filter(alimentos => alimentos?.title !== titleAntiga);
           const dadosFiltrado = refeicoes.find(alimentos => alimentos?.title === titleAntiga);
           const dadosCorretos = dadosFiltrado?.data.filter(newRefeicao => newRefeicao?.id !== id );
+
+          if(dadosCorretos?.length > 0){
+            const dadosDataCorreta = {
+              title: dadosFiltrado?.title,
+              data : dadosCorretos
+            }
+  
+            
+            const novaRefeicao = [...outrosDados, dadosDataCorreta ]
+            const storage = JSON.stringify(novaRefeicao);
+            await AsyncStorage.setItem(REFEICOES_COLLECTION, storage);     
+          }else{
+            const novaRefeicao = outrosDados;
+            const storage = JSON.stringify(novaRefeicao);
+            await AsyncStorage.setItem(REFEICOES_COLLECTION, storage);     
+          }         
           
-          const dadosDataCorreta = {
-            title: dadosFiltrado?.title,
-            data : dadosCorretos
-          } 
-          
-          const novaRefeicao = [...outrosDados, dadosDataCorreta ]
-          const storage = JSON.stringify(novaRefeicao);
-          await AsyncStorage.setItem(REFEICOES_COLLECTION, storage);     
 
         }
       
