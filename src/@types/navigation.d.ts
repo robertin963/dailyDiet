@@ -11,12 +11,22 @@ export declare global{
         type: 'PRIMARY' | 'SECONDARY'
       };
       descricao: {
+        id: number;
         title: string;
         refeicao: string;
         descricao: string;
         hora: string;
         dentroDieta: boolean;
         type: 'PRIMARY' | 'SECONDARY';
+      },
+      editar: {
+        idRefeicao: number;
+        dataRefeicao: string;
+        nomeRefeicao: string;
+        descricaoRefeicao: string;
+        horaRefeicao: string;
+        dentroDietaRefeicao: boolean;
+        typeRefeicao: 'PRIMARY' | 'SECONDARY';
       }
     }
   }

@@ -45,6 +45,7 @@ export function CardListRefeicoes({hora, id,  nomeRefeicao, type = 'PRIMARY', ..
     // console.log('refeicaoSelecionadaDescricao', refeicaoSelecionada?.descricao);
 
     navigation.navigate('descricao', {
+      id: id,
       title: dataRefeicao,
       refeicao: refeicaoSelecionada.refeicao,
       descricao: refeicaoSelecionada.descricao,

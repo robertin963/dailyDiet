@@ -7,6 +7,8 @@ import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { CardListRefeicoesData } from "@components/CardListRefeicaoData";
  import { refeicaoGetEstatisticas } from "@storage/refeicao/refeicaoGetEstatisticas";
 import { useCallback, useState } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { IDENTIFICADOR_COLLECTION, REFEICOES_COLLECTION } from "@storage/storageConfig";
 
 type RefeicaoProps = {
   qtdRefeicoes: number;
@@ -29,7 +31,16 @@ export function Home(){
     navigation.navigate('estatisticas', { percentagem: estatistica?.percentagemDentroDieta , type: estatistica?.percentagemDentroDieta >= 50 ? 'PRIMARY' : 'SECONDARY' } )
   }
 
+  async function handleZerarListas(){
+    const idStorage = JSON.stringify({id: 0});
+    await AsyncStorage.setItem(IDENTIFICADOR_COLLECTION, idStorage);
+    const refeicaoStorage = JSON.stringify({});
+    await AsyncStorage.setItem(REFEICOES_COLLECTION,refeicaoStorage);
+
+  }
+
   useFocusEffect(useCallback(() => {
+    //handleZerarListas();
     handleGetEstatisticas();
   },[]));
 

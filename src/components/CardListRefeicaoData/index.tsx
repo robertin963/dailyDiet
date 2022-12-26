@@ -1,6 +1,8 @@
 import { CardListRefeicoes } from "@components/CardListRefeicoes";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useFocusEffect } from "@react-navigation/native";
 import { refeicoesGetAll } from "@storage/refeicao/refeicaoGetAll";
+import { IDENTIFICADOR_COLLECTION } from "@storage/storageConfig";
 import { useCallback, useEffect, useState } from "react";
 import { SectionList } from "react-native";
 import { Container, DataRefeicao } from "./styles";
@@ -30,9 +32,8 @@ export function CardListRefeicoesData(){
       dados.map(dado => {
         dado.data.sort((a,b) => a.hora < b.hora)
       })
-      
       setDadosRefeicos(dados);
-      // console.log(dadosRefeicoes);
+      console.log(dadosRefeicoes);
     }    
     useFocusEffect(useCallback(() => {
       fetchRefeicoes();

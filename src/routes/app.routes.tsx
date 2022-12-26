@@ -1,5 +1,6 @@
 import { createNativeStackNavigator} from '@react-navigation/native-stack';
 import { DetalhesRefeicao } from '@screens/DetalhesRefeicao';
+import { EditarRefeicao } from '@screens/EditarRefeicao';
 import { Estatisticas } from '@screens/Estatisticas';
 import { Home } from '@screens/Home';
 import { NovaRefeicao } from '@screens/NovaRefeicao';
@@ -16,6 +17,7 @@ export function AppRoutes(){
       <Screen name="refeicao" component={NovaRefeicao} />
       <Screen name="salvo" component={RefeicaoSalvo} />
       <Screen name="descricao" component={DetalhesRefeicao} />
+      <Screen name="editar" component={EditarRefeicao} />
     </Navigator>
   );
 }

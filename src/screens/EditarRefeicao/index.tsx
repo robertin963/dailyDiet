@@ -7,29 +7,42 @@ import { TextInputMask } from "react-native-masked-text";
 import { BtnAddRefeicao, BtnDieta, CirculoStatus, Context, DivLinha, DivLinha2Colunas, DivLinha2ColunasSemMargem, DivLinhaMetade, Form, Input, Label, TextBtnRefeicao } from "./styles";
 import THEME from '../../theme';
 import {refeicaoCreate} from '@storage/refeicao/refeicaoCreate';
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { IDENTIFICADOR_COLLECTION } from "@storage/storageConfig";
 import { getNewIdRefeicao } from "@storage/refeicao/getNewIdRefeicao";
+import { refeicaoUpdate } from "@storage/refeicao/refeicaoUpdate";
 
-export function NovaRefeicao(){
+type RoutesParamsProps = {
+  idRefeicao: number;
+  dataRefeicao: string;
+  nomeRefeicao: string;
+  descricaoRefeicao: string;
+  horaRefeicao: string;
+  dentroDietaRefeicao: boolean;
+  typeRefeicao: 'PRIMARY' | 'SECONDARY'
+}
 
-  const [date, setDate] = useState('');  
-  const [hora, setHora] = useState('');
-  const [btnSim, setBtnSim] = useState("DEFAULT");
-  const [btnNao, setBtnNao] = useState("DEFAULT");
-  const [refeicao, setRefeicao] = useState("");
-  const [descricao, setDescricao] = useState("");
-  const [dentroDieta, setDentroDieta] = useState(false);  
+export function EditarRefeicao(){
 
   const navigation = useNavigation();
+  const route = useRoute();
+  const { idRefeicao, dataRefeicao, nomeRefeicao, descricaoRefeicao, horaRefeicao, dentroDietaRefeicao, typeRefeicao } = route.params as RoutesParamsProps;  
+
+  const [date, setDate] = useState(dataRefeicao);  
+  const [hora, setHora] = useState(horaRefeicao);
+  const [btnSim, setBtnSim] = useState(dentroDietaRefeicao ? "PRIMARY" : "DEFAULT");
+  const [btnNao, setBtnNao] = useState(dentroDietaRefeicao ? "DEFAULT" : "SECONDARY");
+  const [refeicao, setRefeicao] = useState(nomeRefeicao);
+  const [descricao, setDescricao] = useState(descricaoRefeicao);
+  const [dentroDieta, setDentroDieta] = useState(dentroDietaRefeicao);  
+
 
   async function handleAddRefeicao(){
     try {
-      const newId = await getNewIdRefeicao();
-      console.log('NovoID', newId);
+      
       const dados = {
-          id: newId,
+          id: idRefeicao,
           hora, 
           refeicao, 
           descricao,
@@ -61,11 +74,11 @@ export function NovaRefeicao(){
         Alert.alert('Nova Refeição', 'Está dentro da dieta precisa ser definido!');
         return; 
       }
-
-  
-      await refeicaoCreate({title: date, hora, id: newId, refeicao, descricao, dentroDieta, type:  dentroDieta  ? "PRIMARY" : "SECONDARY" });
+        
+      await refeicaoUpdate({title: date, titleAntiga: dataRefeicao, hora, id: idRefeicao, refeicao, descricao, dentroDieta, type:  dentroDieta  ? "PRIMARY" : "SECONDARY" });
 
       navigation.navigate('salvo', {type:  dentroDieta  ? "PRIMARY" : "SECONDARY"});
+      
       
     } catch (error) {
       console.log(error);      
@@ -97,7 +110,7 @@ export function NovaRefeicao(){
   return (
     <Container>
       <Context>
-        <CardHeaderNovaRefeicao label="Nova Refeição" type="GRAY" />
+        <CardHeaderNovaRefeicao label="Editar Refeição" type="GRAY" />
         <Form>
           <DivLinha>
             <Label>Nome</Label>
@@ -164,7 +177,7 @@ export function NovaRefeicao(){
         </Form>
       </Context>
       <BtnAddRefeicao onPress={handleAddRefeicao}>
-        <TextBtnRefeicao>Cadastrar refeição</TextBtnRefeicao>
+        <TextBtnRefeicao>Salvar alterações</TextBtnRefeicao>
       </BtnAddRefeicao>
     </Container>
   );  

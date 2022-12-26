@@ -16,11 +16,8 @@ type refeicaoProps = {
 export async function  refeicaoCreate({title, hora, id, refeicao, descricao, dentroDieta, type }: refeicaoProps){
   try {
     
-    const alimentacoes = await refeicoesGetAll();          
+    const alimentacoes = await refeicoesGetAll();   
     if(alimentacoes.length === 0){
-      // console.log('não tem item');
-      //return;
-      
 
       const newRefeicao = {
         title,

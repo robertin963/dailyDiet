@@ -1,5 +1,7 @@
 import styled, {css} from "styled-components/native";
 
+import { PencilSimpleLine, Trash } from 'phosphor-react-native';
+
 export type btnDietaStyleProps = "PRIMARY" | "SECONDARY" | "DEFAULT";
 
 type Props = {
@@ -78,7 +80,7 @@ export const CirculoStatusDieta = styled.View<Props>`
 `;
 
 export const TextoStatusDieta = styled.Text`
-  margin-left: 8px;;
+  margin-left: 8px;
   ${({theme}) => css`
   font-family: ${theme.FONT_FAMILY.REGULAR};
   font-size: ${theme.FONT_SIZE.BODY_S}px;
@@ -96,6 +98,7 @@ export const ViewBtnEditarExcluir = styled.View`
 `;
 
 export const BtnEditarExcluir = styled.TouchableOpacity<Props>`
+  
   margin-bottom: 10px;
   width: 327px;
   height: 50px;
@@ -103,4 +106,39 @@ export const BtnEditarExcluir = styled.TouchableOpacity<Props>`
   border: 1px solid;
   border-color: ${({theme, type}) => type === 'DEFAULT' ? theme.COLORS.BASE.GRAY[100] : theme.COLORS.BASE.GRAY[200] };
   border-radius: 6px;
+`;
+
+export const ViewBtnInterno = styled.View`
+  flex: 1;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const IconPencilSimpleLine = styled(PencilSimpleLine).attrs<Props>(({ theme, type }) => ({
+  size: 18,
+  color: type === 'PRIMARY' ? theme.COLORS.BASE.WHITE: theme.COLORS.BASE.GRAY[100]
+}))`
+  width: 18px;
+  height: 18px;
+`;
+
+export const IconTrash = styled(Trash).attrs<Props>(({ theme, type }) => ({
+  size: 18,
+  color: type === 'PRIMARY' ? theme.COLORS.BASE.WHITE: theme.COLORS.BASE.GRAY[100]
+}))`
+  width: 18px;
+  height: 18px;
+`;
+
+export const TextBtn = styled.Text<Props>`
+  
+  margin-left: 8px;
+  ${({theme, type}) => css`
+    font-family: ${theme.FONT_FAMILY.BOLD};
+    font-size: ${theme.FONT_SIZE.BODY_S}px;
+    color: ${type === 'PRIMARY' ? theme.COLORS.BASE.WHITE : theme.COLORS.BASE.GRAY[100]};
+  `};    
+  width: 100px;
+  height: 18px;
 `;

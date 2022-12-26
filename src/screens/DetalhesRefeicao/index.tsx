@@ -4,9 +4,10 @@ import { StyleSheet, Alert } from "react-native";
 import { format } from 'date-fns';
 import { CardHeaderNovaRefeicao } from "@components/CardHeaderNovaRefeicao";
 import { TextInputMask } from "react-native-masked-text";
-import { BtnEditarExcluir, CirculoStatusDieta, Container, Context, SubTitulo, TextoStatusDieta, Titulo, TituloXS, ViewBtnEditarExcluir, ViewDentroDieta, ViewPrincipal, ViewTextos } from "./styles";
+import { BtnEditarExcluir, CirculoStatusDieta, Container, Context, IconPencilSimpleLine, IconTrash, SubTitulo, TextBtn, TextoStatusDieta, Titulo, TituloXS, ViewBtnEditarExcluir, ViewBtnInterno, ViewDentroDieta, ViewPrincipal, ViewTextos } from "./styles";
 
 type RoutesParamsProps = {
+    id: number;
     title: string;
     refeicao: string;
     descricao: string;
@@ -19,7 +20,19 @@ export function DetalhesRefeicao(){
 
   const navigation = useNavigation();
   const route = useRoute();
-  const { title, refeicao, descricao, hora, dentroDieta, type } = route.params as RoutesParamsProps;  
+  const { id, title, refeicao, descricao, hora, dentroDieta, type } = route.params as RoutesParamsProps;  
+
+  function handleEditarRefeicao(){
+    navigation.navigate('editar', {
+      idRefeicao: id,
+      dataRefeicao: title, 
+      nomeRefeicao: refeicao,
+      descricaoRefeicao: descricao,
+      horaRefeicao: hora,
+      dentroDietaRefeicao: dentroDieta,
+      typeRefeicao: dentroDieta ? 'PRIMARY' : 'SECONDARY'
+    });  
+  }
 
   return (
     <Container>
@@ -38,8 +51,18 @@ export function DetalhesRefeicao(){
           </ViewTextos>
         </ViewPrincipal>
         <ViewBtnEditarExcluir>
-          <BtnEditarExcluir type="PRIMARY" />
-          <BtnEditarExcluir type="DEFAULT" />
+          <BtnEditarExcluir type="PRIMARY" onPress={handleEditarRefeicao}>
+            <ViewBtnInterno>
+              <IconPencilSimpleLine type="PRIMARY" />
+              <TextBtn type="PRIMARY">Editar refeição</TextBtn>
+            </ViewBtnInterno>
+          </BtnEditarExcluir>
+          <BtnEditarExcluir type="DEFAULT">
+          <ViewBtnInterno>
+              <IconTrash type="SECONDARY" />
+              <TextBtn type="SECONDARY">Excluir refeição</TextBtn>
+            </ViewBtnInterno>
+          </BtnEditarExcluir>
         </ViewBtnEditarExcluir>
       </Context>
       
