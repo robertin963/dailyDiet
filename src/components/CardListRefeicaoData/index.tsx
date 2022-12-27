@@ -91,7 +91,7 @@ export function CardListRefeicoesData(){
           <CardListRefeicoes hora={item.hora} id={item.id} nomeRefeicao={item.refeicao} type={item.type} />                 
         }
         renderSectionHeader={({section: {title} }) => (
-          <DataRefeicao>{title.replaceAll('/','.')}</DataRefeicao>
+          <DataRefeicao>{title.replace('/','.').replace('/','.')}</DataRefeicao>
         )}
         showsHorizontalScrollIndicator={false}
         showsVerticalScrollIndicator={false}

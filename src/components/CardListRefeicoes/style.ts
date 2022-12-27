@@ -30,7 +30,7 @@ ${({theme}) => css`
     font-size: ${theme.FONT_SIZE.BODY_XS}px;
     color: ${theme.COLORS.BASE.GRAY[100]};
   `};  
-  width: 32px ;
+  width: 45px ;
   text-align: center;
   margin: 0 12px;
 `;
