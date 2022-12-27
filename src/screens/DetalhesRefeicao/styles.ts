@@ -100,7 +100,7 @@ export const ViewBtnEditarExcluir = styled.View`
 export const BtnEditarExcluir = styled.TouchableOpacity<Props>`
   
   margin-bottom: 10px;
-  width: 327px;
+  width: 100%;
   height: 50px;
   background-color: ${({theme, type}) => type === 'DEFAULT' ? theme.COLORS.BASE.WHITE : theme.COLORS.BASE.GRAY[200] };
   border: 1px solid;

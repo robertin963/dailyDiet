@@ -18,7 +18,7 @@ export const Context = styled.View`
   background-color: ${({theme}) => theme.COLORS.BASE.GRAY[500]};  
   `;
 
-export const Form = styled.View`
+export const Form = styled.ScrollView`
   flex: 1;
   background-color: ${({theme}) => theme.COLORS.BASE.GRAY[700]};  
   border-top-left-radius: 20px;
@@ -102,7 +102,7 @@ export const BtnAddRefeicao = styled.TouchableOpacity`
   height: 50px;
   width: 327px;
   background-color: ${({theme}) => theme.COLORS.BASE.GRAY[200]};
-  margin-bottom: 40px;
+  margin-bottom: 35px;
   align-items: center;
   justify-content: center;
   flex-direction: row;

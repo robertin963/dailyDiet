@@ -40,8 +40,9 @@ export const TextNomeRefeicao = styled.Text`
     font-family: ${theme.FONT_FAMILY.REGULAR};
     font-size: ${theme.FONT_SIZE.BODY_M}px;
     color: ${theme.COLORS.BASE.GRAY[200]};
-  `};  
-  width:  217px;
+  `};
+  flex: 1;  
+  /* width:  217px; */
   margin: 0 12px ;
 `;
 

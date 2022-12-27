@@ -18,7 +18,7 @@ export const Context = styled.View`
   background-color: ${({theme}) => theme.COLORS.BASE.GRAY[500]};  
   `;
 
-export const Form = styled.View`
+export const Form = styled.ScrollView`
   flex: 1;
   background-color: ${({theme}) => theme.COLORS.BASE.GRAY[700]};  
   border-top-left-radius: 20px;

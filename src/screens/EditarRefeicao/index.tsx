@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { StyleSheet, Alert } from "react-native";
+import { StyleSheet, Alert, KeyboardAvoidingView, Platform } from "react-native";
 import { format } from 'date-fns';
 import { CardHeaderNovaRefeicao } from "@components/CardHeaderNovaRefeicao";
 import { Container } from "@components/Loading/styles";
@@ -107,11 +107,13 @@ export function EditarRefeicao(){
     }
   }
 
+  // const behavior = Platform.OS === "ios" ? "padding" : "padding";
   return (
     <Container>
       <Context>
         <CardHeaderNovaRefeicao label="Editar Refeição" type="GRAY" />
         <Form>
+          <KeyboardAvoidingView style={{flex: 1}} behavior="position" keyboardVerticalOffset={50}>
           <DivLinha>
             <Label>Nome</Label>
             <Input value={refeicao} onChangeText={setRefeicao} />
@@ -123,7 +125,7 @@ export function EditarRefeicao(){
               height: 120
             }} multiline={true} numberOfLines={4} value={descricao} onChangeText={setDescricao} />
           </DivLinha>
-
+          
           <DivLinha2Colunas>
             <DivLinhaMetade>
               <Label>Data</Label>
@@ -173,7 +175,7 @@ export function EditarRefeicao(){
             </DivLinha2ColunasSemMargem>
           </DivLinha>
 
-
+          </KeyboardAvoidingView>
         </Form>
       </Context>
       <BtnAddRefeicao onPress={handleAddRefeicao}>
