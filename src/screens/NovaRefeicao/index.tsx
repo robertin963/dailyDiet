@@ -96,7 +96,7 @@ export function NovaRefeicao(){
 
   const offSet = Platform.OS === 'ios' ? 60 : 5;
   const behavior = Platform.OS === 'ios' ?  'position' : 'padding';
-  console.log(Platform.OS);
+  // console.log(Platform.OS);
 
   return (
     <Container>
